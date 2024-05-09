@@ -1,0 +1,133 @@
+---
+layout: post
+title: 爬蟲 & Python
+date: 2024-05-09
+description: 使用 python 寫爬蟲
+img: github-page.png # Add image post (optional)
+---
+# 爬蟲 & Python
+## 一、規格書
+- 第一階段：抓取一覽頁的「店鋪 url」 +「所在地區」。<br>
+- 第二階段：依「所在地區」排序，撈取店鋪詳細頁。
+## 二、python 環境建置
+Python 3.10 以後，跟前面的版本有很大的差異。
+例如：查詢 python 版本的 CLI 就不一樣了。<br>
+- python 3.9
+> python3 --version
+
+- python 指令在 3.10 以上才有
+> python -V
+
+### 1. PyCharm 編輯器
+JetBrains，phpStorm 開發商。
+### 2. 安裝 python
+- 在 mac 或 windows
+    - python 官網下載安裝包：https://www.python.org/downloads/macos/
+- 在 linux
+    - 安裝 pyenv，管理 python 版本的工具。
+### 3. 安裝 pyenv 和 pip
+使用 python 開發時，會安裝 2 個必要工具，pyenv 和 pip，分別對應像是 node 的 nvm 和 npm。
+
+|   | **Python** | **node** |
+|----|----|----|
+| **管理版本** | pyenv |nvm |
+| **管理套件** | pip |npm |
+
+### 安裝 pyenv
+- 管理 python 版本的工具，像 node 的 nvm。
+- [pyenv 安裝教學](pyenvInstall.md)
+- 查看可以安裝的版本
+> pyenv install -l
+- 安裝其中一種 python 的版本
+> pyenv install -v 3.12.2
+- 列出已安裝過的版本
+> pyenv versions
+- 切換 Python 的版本，三種模式 local、global 或 shell。
+    - 在當前目錄下設置 Python 版本，這只對當前目錄及其子目錄有效。
+  > pyenv local 3.12.2
+    - 設置全局 Python 版本，所有 shell 都有效。
+  > pyenv global 3.12.2
+    - 在當前 shell 中切換 Python 版本，當 shell 退出時再進入時，會跳回原本預設的版本。
+  > pyenv shell 3.12.2
+
+### 安裝 pip
+- 管理 python 套件的工具，像 node 的 npm install 建立 package.json。
+- 安裝 pip
+> sudo yum install python3-pip
+- 列出安裝過的套件和版本
+> pip list
+- 建立 requirements.txt，專案裡所需套件的清單
+> pip freeze > requirements.txt
+- 安裝 requirements.txt 清單的套件
+> pip install -r requirements.txt
+
+## 三、python 爬蟲套件
+### 安裝套件
+- pip install [套件名稱]，例如：
+> pip install beautifulsoup4
+
+### BeautifulSoup
+使用 BeautifulSoup 抓取資料
+- .select() 中放 css selector。
+```
+from bs4 import BeautifulSoup
+import requests
+
+fetchUrl = "https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/"
+r = requests.get(fetchUrl)
+soup = BeautifulSoup(r.text, "html.parser")
+element = soup.select(".searchResult > .researchCount")
+print(element)
+```
+
+### Selenium + BeautifulSoup
+使用 Selenium 開起 chrome，抓取 dom，再用 BeautifulSoup 抓取資料。
+- 在 Linux 安裝 google chrome
+> yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -y
+- 抓取資料
+```
+from selenium import webdriver
+from bs4 import BeautifulSoup
+import time
+
+fetchUrl = "https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/"
+option = webdriver.ChromeOptions()
+option.add_argument('headless')
+driver = webdriver.Chrome(option)
+driver.get(fetchUrl)
+time.sleep(3)
+html = driver.page_source
+soup = BeautifulSoup(html, 'html.parser')
+element = soup.select(".searchResult > .researchCount")
+print(element)
+```
+
+### pymysql 連線資料庫
+```
+import pymysql
+
+db = pymysql.connect(host='team-project.c9c20i4ugyby.ap-northeast-1.rds.amazonaws.com',
+                     user='admin',
+                     password='XeNiJR32+XEbnKDc',
+                     database='team_project')
+
+cursor = db.cursor()
+```
+
+# 四、程式邏輯
+- 撈取一覽頁的邏輯：<br>
+  依規格書要求的件數撈取 200 件，從第一頁開始，直到滿足 200 件 break 迴圈。
+  要注意的是，若規格書要求 200 件，但實際上只有 199 件，也要 break 迴圈。
+- 撈取店鋪詳細頁的邏輯：<br>
+  依車站排序，撈取店舖 url。
+  Insert 資料庫，並 update flag 紀錄已經 fetch 過此店舖。
+
+- tel 資料：<br>
+  使用 google map api，但這要收費。<br>
+  https://developers.google.com/maps/billing/gmp-billing?hl=zh-tw<br>
+  (SKU：聯絡資料)<br>
+  一個月 $200 美元的抵用金，每個 request $0.003 美元，大約可以 call 66,666 次。
+
+# 五、遇到的問題
+- chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此（官網有寫）。
+- 處理爬蟲中斷。table 新增一個欄位，紀錄已經 fetch過的 url，以免發生中斷又要從頭執行。
