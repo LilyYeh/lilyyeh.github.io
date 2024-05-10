@@ -13,9 +13,9 @@ description: 使用 python 寫爬蟲
 
 ## 一、規格書
 - 爬 3 個網站： <br>
-https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/ <br>
-https://job-medley.com/ans/pref13/employment3/ <br>
-https://relax-job.com/feature/employment/arbeit/ <br>
+  - baito 一覽頁：https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/ <br>
+  - medley 一覽頁：https://job-medley.com/ans/pref13/employment3/ <br>
+  - relax 一覽頁：https://relax-job.com/feature/employment/arbeit/ <br>
 - 第一階段：抓取一覽頁的「店鋪 url」和「所在地區」。<br>
 - 第二階段：依「所在地區」排序，再依序撈取「店鋪詳細頁」的資訊。
 
@@ -34,7 +34,7 @@ JetBrains，phpStorm 開發商。
 - 在 mac 或 windows
     - python 官網下載安裝包：https://www.python.org/downloads/macos/
 
-- 在 linux
+- 在 Linux
     - 安裝 pyenv (管理 python 版本的工具)，再用 pyenv 安裝 python。
 
 ### 3. 安裝 pyenv 和 pip
@@ -59,7 +59,7 @@ JetBrains，phpStorm 開發商。
   > pyenv local 3.12.2
     - 設置全局 Python 版本，所有 shell 都有效。
   > pyenv global 3.12.2
-    - 在當前 shell 中切換 Python 版本，當 shell 退出時再進入時，會跳回原本預設的版本。
+    - 在當前 shell 中切換 Python 版本，當 shell 退出再進入，會跳回原本預設的版本。
   > pyenv shell 3.12.2
 
 ### 安裝 pip
@@ -148,10 +148,10 @@ cursor = db.cursor()
 | 2 | 一覽頁 url | 店鋪 B url | 日比谷駅 徒歩1分 | 0              |
 
 # 五、遇到的問題
-- chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此（官網有寫 https://pptr.dev/troubleshooting）。
+- chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此，[木偶人官網](https://pptr.dev/troubleshooting)有寫。 
 - 建立爬蟲中斷機制，以免發生中斷又要從頭執行。我使用了 2 個方法：
-  - 一覽頁的爬蟲：每次重新執行時，確認 table 已經 insert 了多少筆此一覽頁的「店鋪件數」，已達件數便不再 fetch。
-  > sql = " SELECT count(*) FROM `baito` WHERE fetch_url LIKE '" + url + "%' "
+  - 一覽頁的爬蟲：每次重新執行時，確認每個一覽頁已經 insert 了多少「店鋪件數」，已達件數便不再 fetch。
+  > SELECT count(*) FROM `baito` WHERE fetch_url LIKE '[一覽頁 url]%'
 
-  - 店鋪詳細頁的爬蟲：table 新增一個欄位 (is_request)，紀錄已經 fetch 過的 url，每次重新執行時，只撈取沒 fetch 過的 url。
-  > sql = " SELECT * FROM `baito` WHERE is_requested = 0 "
+  - 店鋪詳細頁的爬蟲：table 新增一個欄位 (is_request)，紀錄已經 fetch 過的 url，每次重新執行時，只 select 沒 fetch 過的 url。
+  > SELECT * FROM `baito` WHERE is_requested = 0
