@@ -12,6 +12,10 @@ description: 使用 python 寫爬蟲
 [五、遇到的問題](#五遇到的問題)<br>
 
 ## 一、規格書
+- 爬 3 個網站： <br>
+https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/ <br>
+https://job-medley.com/ans/pref13/employment3/ <br>
+https://relax-job.com/feature/employment/arbeit/ <br>
 - 第一階段：抓取一覽頁的「店鋪 url」和「所在地區」。<br>
 - 第二階段：依「所在地區」排序，再依序撈取「店鋪詳細頁」的資訊。
 
