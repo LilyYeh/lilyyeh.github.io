@@ -9,6 +9,7 @@ img: github-page.png # Add image post (optional)
 ## 一、規格書
 - 第一階段：抓取一覽頁的「店鋪 url」 +「所在地區」。<br>
 - 第二階段：依「所在地區」排序，撈取店鋪詳細頁。
+
 ## 二、python 環境建置
 Python 3.10 以後，跟前面的版本有很大的差異。
 例如：查詢 python 版本的 CLI 就不一樣了。<br>
