@@ -66,13 +66,11 @@ JetBrains，phpStorm 開發商。
 
 ## 三、python 爬蟲套件
 ### 安裝套件
-- pip install [套件名稱]，例如：
+pip install [套件名稱]，例如：
 > pip install beautifulsoup4
 
 ### BeautifulSoup
 使用 BeautifulSoup 抓取資料
-- .select() 中放 css selector。
-
 ```
 from bs4 import BeautifulSoup
 import requests
@@ -85,10 +83,9 @@ print(element)
 ```
 
 ### Selenium + BeautifulSoup
-使用 Selenium 開起 chrome，抓取 dom，再用 BeautifulSoup 抓取資料。
 - 在 Linux 安裝 google chrome
 > yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -y
-- 抓取資料
+- Selenium 開起 chrome 抓取 dom，再用 BeautifulSoup 抓取資料。
 
 ```
 from selenium import webdriver

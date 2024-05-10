@@ -767,6 +767,7 @@ template {
 *, *::after, *::before {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-style: normal;
 }
 
 html {
@@ -831,6 +832,10 @@ pre code {
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-all;
+}
+
+pre code a {
+    color: #0967ee
 }
 
 table {

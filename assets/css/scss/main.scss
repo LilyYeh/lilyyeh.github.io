@@ -4,6 +4,7 @@
 
 *, *::after, *::before {
   box-sizing: border-box;
+  font-style: normal;
 }
 
 html {
@@ -66,6 +67,9 @@ pre {
     white-space: pre-wrap;
     word-wrap: break-word;
     word-break: break-all;
+    a {
+      color: #0967ee
+    }
   }
 }
 
