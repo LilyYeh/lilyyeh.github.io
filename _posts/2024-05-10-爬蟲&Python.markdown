@@ -35,7 +35,7 @@ JetBrains，phpStorm 開發商。
     - python 官網下載安裝包：https://www.python.org/downloads/macos/
 
 - 在 linux
-    - 安裝 pyenv，管理 python 版本的工具。
+    - 安裝 pyenv (管理 python 版本的工具)，再用 pyenv 安裝 python。
 
 ### 3. 安裝 pyenv 和 pip
 使用 python 開發時，會安裝 2 個必要工具，pyenv 和 pip，分別對應像是 node 的 nvm 和 npm。
