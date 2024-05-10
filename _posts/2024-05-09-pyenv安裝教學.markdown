@@ -1,7 +1,7 @@
 ---
 layout: post
 title: pyenv 安裝教學
-date: 2024-05-09
+date: 2024-05-10
 description: pyenv 安裝教學
 ---
 # pyenv 安裝教學
