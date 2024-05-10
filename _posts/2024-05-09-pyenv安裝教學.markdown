@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [Python 版本控制] pyenv 基本教學
+title: pyenv 安裝教學
 date: 2024-05-09
 description: [Python 版本控制] pyenv 基本教學
 ---

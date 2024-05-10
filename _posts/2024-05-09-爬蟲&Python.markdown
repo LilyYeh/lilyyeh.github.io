@@ -37,7 +37,7 @@ JetBrains，phpStorm 開發商。
 
 ### 安裝 pyenv
 - 管理 python 版本的工具，像 node 的 nvm。
-- [pyenv 安裝教學](/pyenv 安裝教學/)
+- [pyenv 安裝教學](/pyenv安裝教學/)
 - 查看可以安裝的版本
 > pyenv install -l
 - 安裝其中一種 python 的版本
