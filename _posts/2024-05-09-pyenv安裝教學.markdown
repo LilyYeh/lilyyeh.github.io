@@ -5,15 +5,15 @@ date: 2024-05-10
 description: pyenv 安裝教學
 ---
 # pyenv 安裝教學
-1. 先更新套件和安裝相關依賴
+1.先更新套件和安裝相關依賴
 > yum update
 
 > yum install gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel tk-devel libffi-devel xz-devel
 
-2. 從 GitHub 上下載 pyenv
+2.從 GitHub 上下載 pyenv
 > git clone https://github.com/pyenv/pyenv.git ~/.pyenv
 
-3. 在 ~/.bashrc 加入相關路徑和 pyenv init
+3.在 ~/.bashrc 加入相關路徑和 pyenv init
 
 > echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 
@@ -21,10 +21,8 @@ description: pyenv 安裝教學
 
 > echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> ~/.bashrc
 
-
-4. 重新執行 shell，讓設定生效
+4.重新執行 shell，讓設定生效
 > exec "$SHELL"
 
-
-5. 確認是否有安裝成功
+5.確認是否有安裝成功
 > pyenv versions
