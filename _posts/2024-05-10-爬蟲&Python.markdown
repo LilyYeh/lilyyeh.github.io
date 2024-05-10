@@ -12,10 +12,10 @@ description: 使用 python 寫爬蟲
 [五、遇到的問題](#五遇到的問題)<br>
 
 ## 一、規格書
-- 爬 3 個網站： <br>
-  - baito 一覽頁：https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/ <br>
-  - medley 一覽頁：https://job-medley.com/ans/pref13/employment3/ <br>
-  - relax 一覽頁：https://relax-job.com/feature/employment/arbeit/ <br>
+- 爬 3 個網站的「一覽頁」和「店鋪詳細頁」： <br>
+  - [baito](https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/)<br>
+  - [medley](https://job-medley.com/ans/pref13/employment3/) <br>
+  - [relax](https://relax-job.com/feature/employment/arbeit/) <br>
 - 第一階段：抓取一覽頁的「店鋪 url」和「所在地區」。<br>
 - 第二階段：依「所在地區」排序，再依序撈取「店鋪詳細頁」的資訊。
 
@@ -32,7 +32,7 @@ JetBrains，phpStorm 開發商。
 
 ### 2. 安裝 python
 - 在 mac 或 windows
-    - python 官網下載安裝包：https://www.python.org/downloads/macos/
+    - python 官網[下載安裝包](https://www.python.org/downloads/macos/)
 
 - 在 Linux
     - 安裝 pyenv (管理 python 版本的工具)，再用 pyenv 安裝 python。
@@ -136,11 +136,10 @@ cursor = db.cursor()
 
 - tel 資料：<br>
   使用 google map api，但這要收費。<br>
-  https://developers.google.com/maps/billing/gmp-billing?hl=zh-tw<br>
-  (SKU：聯絡資料)<br>
+  [Google 地圖平台計費方式](https://developers.google.com/maps/billing/gmp-billing?hl=zh-tw)<br>
   一個月 $200 美元的抵用金，每個 request $0.003 美元，大約可以 call 66,666 次。
 
-- table 設計：
+- 一覽頁 table 設計：
 
 | **id** | **fetch_url** | **job_url** | **station** | **is_request** |
 |--------|--------------|-------------|----|----------------|
