@@ -113,10 +113,10 @@ print(element)
 ```
 import pymysql
 
-db = pymysql.connect(host='team-project.c9c20i4ugyby.ap-northeast-1.rds.amazonaws.com',
-                     user='admin',
-                     password='XeNiJR32+XEbnKDc',
-                     database='team_project')
+db = pymysql.connect(host='',
+                     user='',
+                     password='',
+                     database='')
 
 cursor = db.cursor()
 ```
