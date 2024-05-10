@@ -21,11 +21,14 @@ Python 3.10 以後，跟前面的版本有很大的差異。
 
 ### 1. PyCharm 編輯器
 JetBrains，phpStorm 開發商。
+
 ### 2. 安裝 python
 - 在 mac 或 windows
     - python 官網下載安裝包：https://www.python.org/downloads/macos/
+
 - 在 linux
     - 安裝 pyenv，管理 python 版本的工具。
+
 ### 3. 安裝 pyenv 和 pip
 使用 python 開發時，會安裝 2 個必要工具，pyenv 和 pip，分別對應像是 node 的 nvm 和 npm。
 
@@ -70,6 +73,7 @@ JetBrains，phpStorm 開發商。
 ### BeautifulSoup
 使用 BeautifulSoup 抓取資料
 - .select() 中放 css selector。
+
 ```
 from bs4 import BeautifulSoup
 import requests
@@ -86,6 +90,7 @@ print(element)
 - 在 Linux 安裝 google chrome
 > yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -y
 - 抓取資料
+
 ```
 from selenium import webdriver
 from bs4 import BeautifulSoup
@@ -104,6 +109,7 @@ print(element)
 ```
 
 ### pymysql 連線資料庫
+
 ```
 import pymysql
 
