@@ -3,7 +3,6 @@ layout: post
 title: 爬蟲 & Python
 date: 2024-05-09
 description: 使用 python 寫爬蟲
-img: github-page.png # Add image post (optional)
 ---
 # 爬蟲 & Python
 ## 一、規格書
