@@ -131,6 +131,18 @@ cursor = db.cursor()
   (SKU：聯絡資料)<br>
   一個月 $200 美元的抵用金，每個 request $0.003 美元，大約可以 call 66,666 次。
 
+- table 設計：
+
+| **id** | **fetch_url** | **job_url** | **station** | **is_request** |
+|--------|--------------|-------------|----|----------------|
+| 1 | 一覽頁 url | 店鋪 A url | 表参道駅 徒歩4分 | 1              |
+| 2 | 一覽頁 url | 店鋪 B url | 日比谷駅 徒歩1分 | 0              |
+
 # 五、遇到的問題
-- chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此（官網有寫）。
-- 處理爬蟲中斷。table 新增一個欄位，紀錄已經 fetch過的 url，以免發生中斷又要從頭執行。
+- chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此（官網有寫 https://pptr.dev/troubleshooting）。
+- 建立爬蟲中斷機制，以免發生中斷又要從頭執行。我使用了 2 個方法：
+  - 一覽頁的爬蟲：每次重新執行時，確認 table 已經 insert 了多少筆此一覽頁的「店鋪件數」，已達件數便不再 fetch。
+  > sql = " SELECT count(*) FROM `baito` WHERE fetch_url LIKE '" + url + "%' "
+
+  - 店鋪詳細頁的爬蟲：table 新增一個欄位 (is_request)，紀錄已經 fetch 過的 url，每次重新執行時，只撈取沒 fetch 過的 url。
+  > sql = " SELECT * FROM `baito` WHERE is_requested = 0 "
