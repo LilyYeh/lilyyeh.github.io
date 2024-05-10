@@ -2,9 +2,9 @@
 layout: post
 title: pyenv 安裝教學
 date: 2024-05-09
-description: [Python 版本控制] pyenv 基本教學
+description: pyenv 安裝教學
 ---
-# [Python 版本控制] pyenv 基本教學
+# pyenv 安裝教學
 1. 先更新套件和安裝相關依賴
 ```
 yum update
