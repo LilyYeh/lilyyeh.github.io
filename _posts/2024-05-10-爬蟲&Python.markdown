@@ -4,7 +4,6 @@ title: 爬蟲 & Python
 date: 2024-05-09
 description: 使用 Python 寫爬蟲
 ---
-# 爬蟲 & Python
 [一、規格書](#一規格書)<br>
 [二、Python 環境建置](#二python-環境建置)<br>
 [三、Python 爬蟲套件](#三python-爬蟲套件)<br>
@@ -126,7 +125,7 @@ db = pymysql.connect(host='',
 cursor = db.cursor()
 ```
 
-# 四、程式邏輯
+## 四、程式邏輯
 - 撈取一覽頁的邏輯：<br>
   依規格書要求的件數撈取 200 件，從第一頁開始，直到滿足 200 件 break 迴圈。
   要注意的是，若規格書要求 200 件，但實際上只有 199 件，也要 break 迴圈。
@@ -146,7 +145,7 @@ cursor = db.cursor()
 | 1 | 一覽頁 url | 店鋪 A url | 表参道駅 徒歩4分 | 1              |
 | 2 | 一覽頁 url | 店鋪 B url | 日比谷駅 徒歩1分 | 0              |
 
-# 五、遇到的問題
+## 五、遇到的問題
 - chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此，[木偶人官網](https://pptr.dev/troubleshooting)有寫。 
 - 建立爬蟲中斷機制，以免發生中斷又要從頭執行。我使用了 2 個方法：
   - 一覽頁的爬蟲：每次重新執行時，確認每個一覽頁已經 insert 了多少「店鋪件數」，已達件數便不再 fetch。
