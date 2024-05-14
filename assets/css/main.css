@@ -442,6 +442,7 @@ template {
           border-radius: 3px;
   margin: 0;
   padding-left: 0.4rem;
+  max-width: 75rem;
 }
 
 .highlighter-rouge {
@@ -830,9 +831,10 @@ pre code {
   padding-right: 0;
   padding-left: 0;
   overflow: auto;
-  white-space: pre-wrap;
+  white-space: pre;
   word-wrap: break-word;
   word-break: break-all;
+  overflow-x: scroll;
 }
 
 pre code a {
