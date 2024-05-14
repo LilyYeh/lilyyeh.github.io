@@ -186,8 +186,8 @@ for idx, list in enumerate(melody.targetUrl):
         shopBlock = soup.select(".c-offers-sort-area .c-offers-sort-area__contents .o-gutter-row .o-gutter-row__item")
         for sb in shopBlock:
             data = {
-                "job_url": sb.select(".job-url"),
-                "station": sb.select(".station")
+                "job_url": sb.select(".job-url"), # 店鋪詳細 url
+                "station": sb.select(".station")  # 店鋪所在地
             }
 
             # 儲存資料庫
@@ -209,6 +209,7 @@ for idx, list in enumerate(melody.targetUrl):
   依車站排序，撈取店舖 url。
   Insert 資料庫，並 update flag 紀錄已經 fetch 過此店舖。
 
+fetchMelodyJobDetail.py
 ```
 import requests
 from bs4 import BeautifulSoup
@@ -261,10 +262,10 @@ gmaps = googlemaps.Client(key="[MY_TOKEN]")
 search_result = gmaps.places(facilityName)
 tel = ""
 if len(search_result['results']) > 0:
-    # 先找到<位置ID>
+    # 先找到 <位置ID>
     place_id = search_result['results'][0]['place_id']
 
-    # 用<位置ID>找店家詳細
+    # 用 <位置ID> 找店家詳細
     place_details = gmaps.place(place_id=place_id, fields=['name', 'formatted_phone_number'])
     tel = place_details['result'].get('formatted_phone_number')
 
