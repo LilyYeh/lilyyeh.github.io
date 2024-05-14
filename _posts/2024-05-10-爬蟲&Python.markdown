@@ -281,7 +281,8 @@ if len(search_result['results']) > 0:
 | 2 | 一覽頁 url | 店鋪 B url | 日比谷駅 徒歩1分 | 0              |
 
 ## 五、遇到的問題
-- chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此，[木偶人官網](https://pptr.dev/troubleshooting)有寫。 
+- chrome 只有支援 x86 的 Linux。目前沒有支援 arm64 的 chrome，使用 node 的木偶人也是如此，[木偶人官網](https://pptr.dev/troubleshooting)有寫。
+> uname -m
 - 建立爬蟲中斷機制，以免發生中斷又要從頭執行。我使用了 2 個方法：
   - 一覽頁的爬蟲：每次重新執行時，確認每個一覽頁已經 insert 了多少「店鋪件數」，已達件數便不再 fetch。
   > SELECT count(*) FROM `baito` WHERE fetch_url LIKE '[一覽頁 url]%'
