@@ -84,9 +84,14 @@ pip install [套件名稱]，例如：
 from bs4 import BeautifulSoup
 import requests
 
+# fetch url
 fetchUrl = "https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/"
 r = requests.get(fetchUrl)
+
+# new BeautifulSoup
 soup = BeautifulSoup(r.text, "html.parser")
+
+# 用 css selector 取得 element
 element = soup.select(".searchResult > .researchCount")
 print(element)
 ```
@@ -101,12 +106,23 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
 
-fetchUrl = "https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/"
+# 啟動 driver
 option = webdriver.ChromeOptions()
+
+# 背景開啟瀏覽器
 option.add_argument('headless')
+
+# 開啟瀏覽器
 driver = webdriver.Chrome(option)
+
+# fetch url
+fetchUrl = "https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/"
 driver.get(fetchUrl)
+
+# 等待頁面渲染
 time.sleep(3)
+
+# 取得 dom
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 element = soup.select(".searchResult > .researchCount")
@@ -130,15 +146,124 @@ cursor = db.cursor()
 - 撈取一覽頁的邏輯：<br>
   依規格書要求的件數撈取 200 件，從第一頁開始，直到滿足 200 件 break 迴圈。
   要注意的是，若規格書要求 200 件，但實際上只有 199 件，也要 break 迴圈。
+
+/urlList/melody.py
+```
+targetUrl = [
+    {'url': 'https://job-medley.com/est/pref13/employment3/', 'number': 200},
+    {'url': 'https://job-medley.com/ans/pref14/employment3/', 'number': 132},
+    {'url': 'https://job-medley.com/ans/pref27/employment3/', 'number': 126},
+    ...
+]
+```
+fetchMelodyJob.py
+```
+from urlList import melody
+import requests
+from bs4 import BeautifulSoup
+
+for idx, list in enumerate(melody.targetUrl):
+    page = 1
+    count = 0
+    while count < list['number']:
+        # 從第 1 頁開始 (https://job-medley.com/est/pref13/employment3/?page=2)
+        fetchUrl = list['url'] if page == 1 else list['url'] + "?page=" + str(page)
+        
+        # request 之前 sleep 1~10 秒
+        time.sleep(random.randint(1, 10))
+        r = requests.get(fetchUrl)
+
+        # new BeautifulSoup
+        soup = BeautifulSoup(r.text, "html.parser")
+
+        # 取得一覽頁總件數
+        shopCount = soup.select(".c-search-condition-title__important")[0].text
+
+        # 取得資訊
+        shopBlock = soup.select(".c-offers-sort-area .c-offers-sort-area__contents .o-gutter-row .o-gutter-row__item")
+        for sb in shopBlock:
+            data = {
+                "job_url": sb.select(".job-url"),
+                "station": sb.select(".station")
+            }
+
+            # 儲存資料庫
+            insert_mysql(fetchUrl, data)
+    
+            # 計算筆數
+            count += 1
+
+            # 若滿足件數，繼續撈取下一個一覽頁
+            if count >= list['number']:
+                break
+
+        # 若已達一覽頁總件數，繼續撈取下一個一覽頁
+        if count >= int(shopCount):
+            break
+```
 - 撈取店鋪詳細頁的邏輯：<br>
   依車站排序，撈取店舖 url。
   Insert 資料庫，並 update flag 紀錄已經 fetch 過此店舖。
+```
+import requests
+from bs4 import BeautifulSoup
 
+def select_jobs():
+    sql = ("SELECT id, job_url, station, is_requested," +
+           "CASE WHEN station LIKE '% 尼崎駅%' THEN 1 " +
+           "     WHEN station LIKE '% 明石駅%' THEN 2 " +
+           "     WHEN station LIKE '% 高松駅%' THEN 3 " +
+           " FROM `melody`" +
+           " WHERE is_requested = 0" +
+           " ORDER BY ordering, id ASC" +
+           " LIMIT 100")
+           
+def update_sql(id):
+    try:
+        sql = "UPDATE melody SET is_requested = 1 WHERE id = " + str(id)
+        cursor.execute(sql)
+        db.commit()
+    except:
+        write_log('sql update error: melody id - ' + str(id))
+        db.rollback()
+
+############################## main ##############################
+jobs = select_jobs()
+for job in jobs:
+    #取得資訊
+    fetchUrl = job['job_url']
+    r = requests.get(fetchUrl, headers={'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'})
+    soup = BeautifulSoup(r.text, "html.parser")
+    ldJson = soup.select('script[type="application/ld+json"]')
+    ...
+    
+    # 儲存資料庫
+    insert_mysql(fetchUrl, data)
+    
+    # 更新資料表 is_requested = 1
+    update_sql(job['id'])
+```
 - tel 資料：<br>
   使用 google map api，但這要收費。<br>
   [Google 地圖平台計費方式](https://developers.google.com/maps/billing/gmp-billing?hl=zh-tw)<br>
   一個月 $200 美元的抵用金，每個 request $0.003 美元，大約可以 call 66,666 次。
+```
+import googlemaps
 
+gmaps = googlemaps.Client(key="[MY_TOKEN]")
+search_result = gmaps.places(facilityName)
+tel = ""
+if len(search_result['results']) > 0:
+    # 先找到<位置ID>
+    place_id = search_result['results'][0]['place_id']
+
+    # 用<位置ID>找店家詳細
+    place_details = gmaps.place(place_id=place_id, fields=['name', 'formatted_phone_number'])
+    tel = place_details['result'].get('formatted_phone_number')
+
+    # 印出 tel
+    print(tel)
+```
 - 一覽頁 table 設計：
 
 | **id** | **fetch_url** | **job_url** | **station** | **is_request** |
