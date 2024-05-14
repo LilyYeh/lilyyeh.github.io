@@ -148,6 +148,7 @@ cursor = db.cursor()
   要注意的是，若規格書要求 200 件，但實際上只有 199 件，也要 break 迴圈。
 
 /urlList/melody.py
+
 ```
 targetUrl = [
     {'url': 'https://job-medley.com/est/pref13/employment3/', 'number': 200},
@@ -156,7 +157,9 @@ targetUrl = [
     ...
 ]
 ```
+
 fetchMelodyJob.py
+
 ```
 from urlList import melody
 import requests
@@ -201,6 +204,7 @@ for idx, list in enumerate(melody.targetUrl):
         if count >= int(shopCount):
             break
 ```
+
 - 撈取店鋪詳細頁的邏輯：<br>
   依車站排序，撈取店舖 url。
   Insert 資料庫，並 update flag 紀錄已經 fetch 過此店舖。
@@ -244,10 +248,12 @@ for job in jobs:
     # 更新資料表 is_requested = 1
     update_sql(job['id'])
 ```
+
 - tel 資料：<br>
   使用 google map api，但這要收費。<br>
   [Google 地圖平台計費方式](https://developers.google.com/maps/billing/gmp-billing?hl=zh-tw)<br>
   一個月 $200 美元的抵用金，每個 request $0.003 美元，大約可以 call 66,666 次。
+
 ```
 import googlemaps
 
@@ -265,6 +271,7 @@ if len(search_result['results']) > 0:
     # 印出 tel
     print(tel)
 ```
+
 - 一覽頁 table 設計：
 
 | **id** | **fetch_url** | **job_url** | **station** | **is_request** |
