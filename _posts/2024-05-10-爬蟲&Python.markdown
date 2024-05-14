@@ -204,6 +204,7 @@ for idx, list in enumerate(melody.targetUrl):
 - 撈取店鋪詳細頁的邏輯：<br>
   依車站排序，撈取店舖 url。
   Insert 資料庫，並 update flag 紀錄已經 fetch 過此店舖。
+
 ```
 import requests
 from bs4 import BeautifulSoup
