@@ -93,6 +93,7 @@ JetBrains，phpStorm 開發商。
 > pip install beautifulsoup4
 
 - 使用 BeautifulSoup 抓取資料
+
 ```
 from bs4 import BeautifulSoup
 import requests
