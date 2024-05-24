@@ -5,6 +5,19 @@ date: 2024-05-10
 description: pyenv 安裝教學
 ---
 # pyenv 安裝教學
+## Mac
+1. 下載 pyenv
+> curl https://pyenv.run | bash
+2. 跑完之後會出現類似以下的提示，請你加入到 ~/.bashrc 或是 ~/.zprofile:
+```
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+3. 重開 terminal，檢查是否安裝成功
+> pyenv versions
+
+## Linux
 1.先更新套件和安裝相關依賴
 > yum update
 
