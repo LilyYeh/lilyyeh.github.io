@@ -67,25 +67,32 @@ JetBrains，phpStorm 開發商。
 > python -m venv ./.venv
 - 開通虛擬環境（Linux/macOS）
 > source .venv/bin/activate
+- 退出虛擬環境
+> deactivate
 
 ### 安裝 pip
 - 管理 Python 套件的工具，像 node 的 npm install 建立 package.json。
 - 安裝 pip
 > sudo yum install python3-pip
 - 列出安裝過的套件和版本
-> pip list
+> pip list -v
+- 安裝/解安裝套件 pip install [套件名稱]，例如：
+> pip install beautifulsoup4
+- 解安裝套件
+> pip uninstall beautifulsoup4
+- 套件安裝資訊
+> pip show beautifulsoup4
 - 建立 requirements.txt，專案裡所需套件的清單
 > pip freeze > requirements.txt
 - 安裝 requirements.txt 清單的套件
 > pip install -r requirements.txt
 
 ## 三、Python 爬蟲套件
-### 安裝套件
-pip install [套件名稱]，例如：
+### BeautifulSoup
+- 安裝 beautifulsoup4
 > pip install beautifulsoup4
 
-### BeautifulSoup
-使用 BeautifulSoup 抓取資料
+- 使用 BeautifulSoup 抓取資料
 ```
 from bs4 import BeautifulSoup
 import requests
@@ -103,6 +110,9 @@ print(element)
 ```
 
 ### Selenium + BeautifulSoup
+- 安裝 Selenium
+> pip install selenium
+
 - 在 Linux 安裝 google chrome
 > yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -y
 - Selenium 開起 chrome 抓取 dom，再用 BeautifulSoup 抓取資料。
