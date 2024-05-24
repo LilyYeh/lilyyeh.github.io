@@ -62,6 +62,12 @@ JetBrains，phpStorm 開發商。
     - 在當前 shell 中切換 Python 版本，當 shell 退出再進入，會跳回原本預設的版本。
   > pyenv shell 3.12.2
 
+### 創建 python 虛擬環境
+- 創建虛擬環境
+> python -m venv ./.venv
+- 開通虛擬環境（Linux/macOS）
+> source .venv/bin/activate
+
 ### 安裝 pip
 - 管理 Python 套件的工具，像 node 的 npm install 建立 package.json。
 - 安裝 pip

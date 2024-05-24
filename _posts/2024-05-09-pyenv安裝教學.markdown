@@ -7,7 +7,10 @@ description: pyenv 安裝教學
 # pyenv 安裝教學
 ## Mac
 1. 下載 pyenv
-> curl https://pyenv.run | bash
+```
+curl https://pyenv.run | bash
+```
+
 2. 跑完之後會出現類似以下的提示，請你加入到 ~/.bashrc 或是 ~/.zprofile:
 ```
 export PATH="$HOME/.pyenv/bin:$PATH"
