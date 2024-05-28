@@ -119,31 +119,38 @@ print(element)
 - Selenium 開起 chrome 抓取 dom，再用 BeautifulSoup 抓取資料。
 
 ```
-from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 # 啟動 driver
 option = webdriver.ChromeOptions()
 
 # 背景開啟瀏覽器
-option.add_argument('headless')
+# option.add_argument('headless')
 
 # 開啟瀏覽器
 driver = webdriver.Chrome(option)
 
 # fetch url
-fetchUrl = "https://baito.mynavi.jp/tokyo/ss-1/ssm-1/sss-1/kd-61/"
+fetchUrl = "https://baito.mynavi.jp/cl-002280403865/job-94305516/?reserve_w_29450608"
 driver.get(fetchUrl)
 
 # 等待頁面渲染
+time.sleep(1)
+
+# tab 会社情報
+button = driver.find_element(By.CSS_SELECTOR, ".tab02")
+button.click()
 time.sleep(3)
 
 # 取得 dom
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
-element = soup.select(".searchResult > .researchCount")
-print(element)
+address = soup.select(".workPlaceAddressDiamondMark")
+for a in address:
+    print(a.text)
 ```
 
 ### PyMySQL 連線資料庫
