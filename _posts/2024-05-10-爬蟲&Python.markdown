@@ -297,6 +297,12 @@ if len(search_result['results']) > 0:
     print(tel)
 ```
 
+- 偽裝 google bot: [Google 檢索器和擷取程式 (使用者代理程式) 總覽](https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers?hl=zh-tw)
+
+```
+r = requests.get(fetchUrl, headers={'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'})
+```
+
 - 一覽頁 table 設計：
 
 | **id** | **fetch_url** | **job_url** | **station** | **is_request** |
