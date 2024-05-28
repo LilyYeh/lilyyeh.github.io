@@ -275,7 +275,7 @@ for job in jobs:
 ```
 
 - tel 資料：<br>
-  使用 google map api，但這要收費。<br>
+  使用 [google map api](https://console.cloud.google.com/google/maps-apis/)，但這要收費。<br>
   [Google 地圖平台計費方式](https://developers.google.com/maps/billing/gmp-billing?hl=zh-tw)<br>
   一個月 $200 美元的抵用金，每個 request $0.003 美元，大約可以 call 66,666 次。
 
