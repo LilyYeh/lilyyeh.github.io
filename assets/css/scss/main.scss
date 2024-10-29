@@ -40,7 +40,7 @@ img + em {
 }
 
 blockquote {
-  border-left: 3px solid rgb(17 162 234);
+  border-left: 3px solid green;
   font-style: italic;
   color: white;
   margin: 0.2rem 0rem 1rem;
@@ -54,7 +54,7 @@ blockquote {
 }
 
 pre {
-  padding: 1rem 2rem;
+  padding: 1rem;
   overflow: auto;
   white-space: pre-wrap;
   word-wrap: break-word;
