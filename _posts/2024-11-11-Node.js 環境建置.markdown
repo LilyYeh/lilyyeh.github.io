@@ -1,0 +1,47 @@
+---
+layout: post
+title: Node.js 環境建置 (mac)
+date: 2024-11-11
+description: Node.js 環境建置 (mac)
+---
+
+### 安裝 NVM - Node.js 版本管理工具
+<a href="https://nodejs.org/en/download/package-manager">Download Node.js</a>
+
+- installs nvm
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+```
+
+執行指令後，會把 nvm repository 複製到 ~/.nvm，也會把 source line 加進你的 profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc)
+```
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+```
+
+- 查看 nvm 安裝路徑，通常會安裝在 home 目錄下的 .nvm 資料夾內。
+> which nvm
+
+- 查看 nvm 版本
+> nvm -v
+ 
+- 查看有哪些 Node.js 版本可以安裝
+> nvm ls-remote
+
+- install node
+> nvm install {version}
+
+- 若要最後一版 lastest
+> nvm install node
+
+- 看所有安裝的列表
+> nvm ls
+
+- 切替 node 版本
+> nvm use {version}
+
+- 查看 node 版本
+> node -v
+
+- 查看 npm 版本
+> npm -v

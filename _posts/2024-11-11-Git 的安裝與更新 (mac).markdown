@@ -1,0 +1,34 @@
+---
+layout: post
+title: Git 的安裝與更新 (mac)
+date: 2024-11-11
+description: Git 的安裝與更新 (mac)
+---
+- 確認版本
+> git --version
+
+- 查看可用版本
+> brew info git
+
+- 安裝最新版
+> brew install git
+
+- Homebrew 可能需要更新，以識別可用的最新版本
+> brew update
+
+- 升級最新版
+> brew upgrade git
+
+- 執行 git --version 確認當前版本，若沒有切換到最新版本，進行以下確認：
+1. 查看當前(舊)版本的路徑
+> which git
+2. 查看欲使用(新)版本的路徑
+> brew info git
+3. 查看舊版本的path是否優先於新版本
+> echo $PATH
+4. 到 ~/.bash_profile 新版本的路徑，以確保 homebrew 的路經優先
+> export PATH="/opt/homebrew/bin:/opt/homebrew/Cellar/git/2.47.0/bin:$PATH"
+5. 更改生效
+> source ~/.bash_profile
+6. 最後檢查是否為更新為最新版
+> git --version
