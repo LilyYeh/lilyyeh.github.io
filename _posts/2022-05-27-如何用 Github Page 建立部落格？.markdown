@@ -26,19 +26,25 @@ img: github-page.png # Add image post (optional)
 #### 步驟3. 在 local 瀏覽我的 Github Page
 - 建置教學 → <a target="_blank" href="https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll">Testing your GitHub Pages site locally with Jekyll</a>
 - 濃縮版，打開 terminal
-  - 在 macOS 安裝 Homebrew 
-  ```
+  - 在 macOS 安裝 Homebrew
   > /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
+
   - 安裝 Ruby
+
   ```
-  > brew install chruby ruby-install
-  > ruby-install ruby 3.3.5
-  > ruby -v
-  > echo "source $(brew --prefix)/opt/chruby/share/chruby/chruby.sh" >> ~/.zprofile
-  > echo "source $(brew --prefix)/opt/chruby/share/chruby/auto.sh" >> ~/.zprofile
-  > echo "chruby ruby-3.3.5" >> ~/.zprofile
+  > brew install rbenv ruby-build
+  
+  ~/.zshrc 加入
+  eval "$(rbenv init -)"
+  
+  重新載入設定
+  > source ~/.zshr
+  
+  安裝 Ruby
+  > rbenv install 3.3.0
+  > rbenv global 3.3.0
   ```
+
   - 安裝 Jekyll
   ```
   > gem install jekyll
